@@ -29,7 +29,7 @@ namespace String
             words = words.Where(x => x != "").ToArray();
             return words;
         }
-        public static string TheLongestWord(string text) // Находим самое длинное слово
+        public static string TheLongestWord(string text) // Поиск самого длинного слова
         {
             Console.WriteLine("Самое длинное слово:");
             string[] words = SpliterWords(text);
@@ -48,7 +48,8 @@ namespace String
         }
         static string ConvertWord(string maxWord)
         {
-            if ((maxWord.Length % 2) == 0) maxWord = maxWord.Substring(maxWord.Length / 2);
+            if ((maxWord.Length % 2) == 0) 
+                maxWord = maxWord.Substring(maxWord.Length / 2);
             else
             {
                 maxWord = maxWord.Replace(maxWord[maxWord.Length / 2], '*');
@@ -62,8 +63,6 @@ namespace String
             var str = Console.ReadLine();
             Program.CountSym(str);
             SpliterSentence(str);
-            //longword(str);
-            //convertword(maxword);
             foreach (string word in SpliterWords(str).Distinct(StringComparer.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine($"{word.ToLower()}");
