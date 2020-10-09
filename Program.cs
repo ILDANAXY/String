@@ -57,7 +57,7 @@ namespace String
             return maxWord;
         }
 
-        static void Main(string[] args) //Вызов всех методов
+        static void Main(string[] args) //Вызов всех методов 
         {
             Console.WriteLine("Введите ваш текст:");
             var str = Console.ReadLine();
