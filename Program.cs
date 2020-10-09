@@ -7,13 +7,13 @@ namespace String
 {
     class Program
     {
-        static void CountSym(string x) //Счётчик знаков препинания
+        static void CountSymb(string x) //Счётчик знаков препинания
         {
             int pCount = x.Count(Char.IsPunctuation);
             Console.Write("Количество знаков препинания в этом тексте:");
             Console.WriteLine(pCount);
         }
-        static void SpliterSentence(string Sen) //Выводим предложения с новой строки
+        static void SplitSentence(string Sen) //Выводим предложения с новой строки
         {
             string[] sentences = Regex.Split(Sen, @"(?<=[\.!\?])\s+");
             Console.WriteLine("Предложения:");
@@ -23,16 +23,16 @@ namespace String
             }
         }
 
-        static string[] SpliterWords(string str) //Создаем массив обработанных слов
+        static string[] SplitWords(string str) //Создаем массив обработанных слов
         {
             string[] words = str.Split(' ', '.', ',', '!', '?', '-', ';', ':', '"', '(', ')');
             words = words.Where(x => x != "").ToArray();
             return words;
         }
-        public static string TheLongestWord(string text) // Поиск самого длинного слова
+        public static string FindTheLongestWord(string text) // Поиск самого длинного слова
         {
             Console.WriteLine("Самое длинное слово:");
-            string[] words = SpliterWords(text);
+            string[] words = SplitWords(text);
             int max = -1;
             string maxWord = " ";
             foreach (string word in words)
@@ -61,10 +61,10 @@ namespace String
         {
             Console.WriteLine("Введите ваш текст:");
             var str = Console.ReadLine();
-            Program.CountSym(str);
-            SpliterSentence(str);
-            Console.WriteLine($"Уникальные слова: {string.Join(", ", SpliterWords(str).Distinct()).ToLower()}");
-            Console.WriteLine($"Самое длинное слово: {TheLongestWord(SpliterWords(str))}");
+            Program.CountSymb(str);
+            SplitSentence(str);
+            Console.WriteLine($"Уникальные слова: {string.Join(", ", SplitWords(str).Distinct()).ToLower()}");
+            Console.WriteLine($"Самое длинное слово: {FindTheLongestWord(SplitWords(str))}");
             ConvertWord(str);
         }
 
