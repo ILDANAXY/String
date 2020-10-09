@@ -63,12 +63,8 @@ namespace String
             var str = Console.ReadLine();
             Program.CountSym(str);
             SpliterSentence(str);
-            foreach (string word in SpliterWords(str).Distinct(StringComparer.CurrentCultureIgnoreCase))
-            {
-                Console.WriteLine($"{word.ToLower()}");
-            }
-            Console.WriteLine($"Самое длинное слово: {TheLongestWord(SpliterWords(str))}");
             Console.WriteLine($"Уникальные слова: {string.Join(", ", SpliterWords(str).Distinct()).ToLower()}");
+            Console.WriteLine($"Самое длинное слово: {TheLongestWord(SpliterWords(str))}");
             ConvertWord(str);
         }
 
