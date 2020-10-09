@@ -23,13 +23,13 @@ namespace String
             }
         }
 
-        public static string[] SpliterWords(string text)
+        static string[] SpliterWords(string str)
         {
-            string[] words = text.Split(' ', '.', ',', '!', '?', '(', ')', '"', '\'', '*', ';', ':');
+            string[] words = str.Split(' ', '.', ',', '!', '?', '-', ';', ':', '"', '(', ')');
+            words = words.Where(x => x != "").ToArray();
             return words;
         }
-
-        public static string LongWord(string text) // Находим самое длинное слово
+        public static string TheLongestWord(string text) // Находим самое длинное слово
         {
             Console.WriteLine("Самое длинное слово:");
             string[] words = SpliterWords(text);
@@ -45,23 +45,15 @@ namespace String
             }
 
             return maxWord;
-        } 
-        public static string ConvertWord(string word) // Изменяем слово в зависимости от четности его длины
+        }
+        static string ConvertWord(string maxWord)
         {
-            if (word.Length / 2 == 0)
-                {
-                word = word.Substring(0, word.Length / 2);
-                Console.WriteLine(word);
-                Console.ReadLine();
-                }
+            if ((maxWord.Length % 2) == 0) maxWord = maxWord.Substring(maxWord.Length / 2);
             else
             {
-                int centerInt = word.Length / 2;
-                char centerCh = word[centerInt];
-                word = word.Replace(centerCh, '*');
+                maxWord = maxWord.Replace(maxWord[maxWord.Length / 2], '*');
             }
-
-            return word;
+            return maxWord;
         }
 
         static void Main(string[] args)
@@ -72,7 +64,12 @@ namespace String
             SpliterSentence(str);
             //longword(str);
             //convertword(maxword);
-            Console.WriteLine(ConvertWord(LongWord(str)));
+            foreach (string word in SpliterWords(str).Distinct(StringComparer.CurrentCultureIgnoreCase))
+            {
+                Console.WriteLine($"{word.ToLower()}");
+            }
+            Console.WriteLine($"Самое длинное слово: {TheLongestWord(SpliterWords(str))}");
+            ConvertWord(str);
         }
 
     }
