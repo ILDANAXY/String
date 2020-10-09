@@ -7,13 +7,13 @@ namespace String
 {
     class Program
     {
-        static void CountSym(string x)
+        static void CountSym(string x) //Счётчик знаков препинания
         {
             int pCount = x.Count(Char.IsPunctuation);
             Console.Write("Количество знаков препинания в этом тексте:");
             Console.WriteLine(pCount);
         }
-        static void SpliterSentence(string Sen)
+        static void SpliterSentence(string Sen) //Выводим предложения с новой строки
         {
             string[] sentences = Regex.Split(Sen, @"(?<=[\.!\?])\s+");
             Console.WriteLine("Предложения:");
@@ -23,7 +23,7 @@ namespace String
             }
         }
 
-        static string[] SpliterWords(string str)
+        static string[] SpliterWords(string str) //Создаем массив обработанных слов
         {
             string[] words = str.Split(' ', '.', ',', '!', '?', '-', ';', ':', '"', '(', ')');
             words = words.Where(x => x != "").ToArray();
@@ -46,7 +46,7 @@ namespace String
 
             return maxWord;
         }
-        static string ConvertWord(string maxWord)
+        static string ConvertWord(string maxWord) //Проверка чётности и нечётности
         {
             if ((maxWord.Length % 2) == 0) 
                 maxWord = maxWord.Substring(maxWord.Length / 2);
@@ -57,7 +57,7 @@ namespace String
             return maxWord;
         }
 
-        static void Main(string[] args)
+        static void Main(string[] args) //Вызов всех методов
         {
             Console.WriteLine("Введите ваш текст:");
             var str = Console.ReadLine();
@@ -68,6 +68,7 @@ namespace String
                 Console.WriteLine($"{word.ToLower()}");
             }
             Console.WriteLine($"Самое длинное слово: {TheLongestWord(SpliterWords(str))}");
+            Console.WriteLine($"Уникальные слова: {string.Join(", ", SpliterWords(str).Distinct()).ToLower()}");
             ConvertWord(str);
         }
 
